@@ -1,0 +1,40 @@
+pipeline:
+  name: MyFirstPipeline
+  identifier: MyFirstPipeline
+  projectIdentifier: MyFirstProject
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: SampleInfra
+        identifier: SampleInfraSetup
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: CreateStack
+                  name: sample-infra-stack
+                  identifier: SampleInfraSetup
+                  spec:
+                    provisionerIdentifier: eei_unitedvoices_Infra
+                    configuration:
+                      stackName: harness-infra-stack
+                      connectorRef: aws_connector
+                      region: ap-south-1
+                      templateFile:
+                        type: S3URL
+                        spec:
+                          templateUrl: https://my-sample-proj-bucket.s3.ap-south-1.amazonaws.com/LoyaltyResource.yaml
+                      roleArn: ""
+                      tags:
+                        type: Inline
+                        spec:
+                          content: |-
+                            [{
+                             "key":"ApplicationCI",
+                             "value":"eei"
+                            }]
+                  timeout: 10m
+        tags: {}
