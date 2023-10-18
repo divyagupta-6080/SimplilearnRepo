@@ -1,0 +1,29 @@
+pipeline:
+  name: deletestack
+  identifier: deletestack
+  projectIdentifier: MyFirstProject
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: Delete-Infra-ECSCluster
+        identifier: DeleteInfraECSCluster
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: DeleteStack
+                  name: DeleteECSCluster
+                  identifier: DeleteECSCluster
+                  spec:
+                    configuration:
+                      type: Inline
+                      spec:
+                        connectorRef: <+input>
+                        region: <+input>
+                        stackName: <+input>
+                      connectorRef: <+input>
+                  timeout: 10m
+        tags: {}
