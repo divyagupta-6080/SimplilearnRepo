@@ -1,0 +1,421 @@
+[3:24 PM] Amol Dorkhande
+DEV
+ 
+Done - Kubectl apply flow
+Done - master and worker components
+Done - types of services
+Done - exposing service publicly
+Pending - diff type of controller and its working
+Pending - Qos classes
+Pending - Diff type of errors, k8s,eks
+Pending - headless, endpoints, stateful vs-deployments, daemonsets
+Pending - endpoints,PDB
+Pending - HPA
+Pending - maintanenes cordon, drain, taint tolaration, node selector, labels
+Done - can run master comp. on worker nodes.
+Pending - go through k8s from scratch
+Pending - pod taint tolartion , for node
+Pending - Terra-state lock , import,count modules,workspaces,
+Done - AWSS cross account role,
+BHUSHA - INFRA CLOUD
+Pending - namespace - terminating stuck
+done - kubectl apply create diff
+done - access user- service account
+Pending - prometheus grafana
+Pending - pv,pvc,storageClass
+done - k8s cron job
+Pending - url debug - start curl
+done - ingress nginx - end to end
+done - configmaps where and why?
+Pending - env or configmap when to decide
+Pending - configmap or secret ?
+Pending - cross account eks- access
+NITIN - ALPHA SENSE
+Pending - CSI driver, pvpvc
+done - readiness vs liveness
+Pending - building docker pipeline
+Pending - ways to secure docker file
+Pending - multistage build , DIND
+Pending - packer
+Pending - session sticky
+Pending - WAF
+Pending - upgrading eks k8s,binding.
+Nitin - INFRA CLOUD
+Pending - terraform update strategy 11 to 12
+Pending - current process latest process
+Pending - pass var in shell
+Pending - auto scaling - assign Eip from pool, assign vai user data
+Pending - nlb alb diff
+Pending - ci/cd
+Pending - jenkins webhook
+done - fluentd
+Pending - admission web hook
+ 
+ 
+# Terraform
+ 
+## what if 2 users run `terraform apply` at the same time
+ 
+## difference between TF11 and TF12
+ 
+## how to create aws_ec2_instance in multiple region when aws_ec2_instance does not have region attribute
+ 
+## a module has logic to deploy Nginx, how can we deploy this module multiple times
+ 
+##
+ 
+# Kubernetes
+ 
+## Difference between Deployment, DaemonSet and StatefulSet
+ 
+## what is static pod
+ 
+## in EKS, what to do if pod is in Pending state due to unavailable IP
+ 
+## in EKS, what is default CNI plugin
+ 
+## what can be done if docker image size is large
+ 
+## how to expose pods, which service type to use
+ 
+## what is workflow for any request, example `kubectl get pod`
+ 
+ 
+ 
+ 
+# AWS
+ 
+## difference between public and private subnets
+ 
+## difference between Route Table and NACL
+ 
+ 
+ 
+# Docker
+ 
+## can we expose 2 containers with same port using host-port
+ 
+## importance of docker image size
+ 
+## how to decrease docker image size
+ 
+## what is intermediate container
+ 
+## describe Multi layer image
+ 
+ 
+# Helm
+ 
+## how can we define the order of resources creation, example ConfigMap get created before Deployment
+ 
+ 
+# Chef Cookbook
+ 
+## configure docker on instance
+ 
+ 
+## monitor the nginx is running
+ 
+issues:
+node selector
+node affinity for hcap pods
+pod state Pending, crashpull backoff, startup prode
+storageclass not create readwrite permission
+pv ko permission kon deta hai, attach detach, comes via iam policy
+cluster type public private
+checking old pod log,
+side car container
+ 
+Help shift
+#Linux commands
+* You can use the following command to list instances with specific tags
+/home/testuser/.local/bin/aws ec2 describe-instances --endpoint-url http://localhost:3000/ --filters 'Name=tag-key,Values=cluster' 'Name=tag-value,Values="build,nginx"'
+ 
+Problem Statement:
+#From an inventory of instances in ec2, using a scripting language like
+#python (boto) or ruby with aws sdk or BASH script:
+1. List down instances which do not match a "cluster" tag with value "webserver".
+2. Add a value in "cluster" tag with value "csv", idempotently.
+https://hands-on.cloud/working-with-ec2-instances-using-boto3-in-python/#Listing-EC2-instance-Tags
+ 
+ 
+ 
+ 
+ 
+ 
+/home/testuser/.local/bin/aws ec2 describe-instances --endpoint-url http://localhost:3000/ 
+ 
+/home/testuser/.local/bin/aws ec2 run-instances --image-id ami-abc12345 --count 5 --instance-type t2.micro --key-name MyKeyPair --tag-specifications 'ResourceType=instance,Tags=[{Key=cluster,Value="build,nginx"}]' --endpoint-url http://localhost:3000/
+ 
+ 
+/home/testuser/.local/bin/aws ec2 describe-instances --endpoint-url http://localhost:3000/ --query 'Reservations[].Instances[?!not_null(Tags[?Key == `cluster`]. webserver)] | []'
+ 
+[3:24 PM] Amol Dorkhande
+Database type prometheus
+ 
+ 
+Time series database in Prometheus
+ 
+530PM
+ 
+ELKstack
+Elasticsearch is a distributed, real-time search and analytics engine. It is used to store and index data from a variety of sources, including logs, events, and metrics.
+Logstash is a tool for collecting and processing data from a variety of sources. It can be used to filter, transform, and enrich data before it is stored in Elasticsearch.
+Kibana is a visualization tool that can be used to explore and analyze data stored in Elasticsearch. It can be used to create charts, graphs, and dashboards to help you understand your data
+ 
+ 
+Code-commit- AWS CodeCommit is a fully-managed, secure, private Git repository service that makes it easy for you to store and manage your code. CodeCommit eliminates the need to manage your own Git infrastructure, so you can focus on building great software.
+ 
+Codedeploy Pipeline - AWS CodeDeploy Pipeline is a continuous delivery service that automates the process of deploying code changes to a variety of deployment targets, including Amazon EC2 instances, on-premises instances, serverless Lambda functions, and Amazon ECS services.
+ 
+Code build- AWS CodeBuild is a fully managed continuous integration (CI) service that compiles your source code, runs unit tests, and produces artifacts that can be used to deploy your application. CodeBuild eliminates the need to provision, manage, and scale your own build infrastructure.
+
+
+Code pipeline- AWS CodePipeline is a continuous delivery service that automates the process of building, testing, and deploying your code changes to a variety of deployment targets, such as Amazon EC2 instances, on-premises instances, serverless Lambda functions, and Amazon ECS services.
+ 
+ 
+Elastic load balancer-
+Clasic Load Balancer http, https, tcp,ssl
+Network loadbalancer support tcp, UDP
+Application loadbalancer http, https
+gatwayLoad Balancer
+ 
+CIDR- Classless Inter-domain Routing
+is a method for allocating IP addresses and routing IP packets
+
+
+Netmask- A netmask, also known as a network mask or subnet mask, is a 32-bit value that is used to identify the network and host portions of an IP address. The netmask is used by routers to determine how to route IP packets.
+ 
+ 
+Kubernetes version differences
+1.23. and 1.24
+ 
+CRI- container runtime interface for docker (dockershim) deprecated.
+CSI graduated to use stable version
+Dynamic kublet config removed
+Master naode lalable won’t be available on control plane
+Valumesnapshot CRD- custom resource definition
+ 
+ 
+ 
+Docker build and compose
+Docker build is used to create a docker image
+Docker-compose is used to run the docker image with service configuration
+ 
+EBS type volume
+There are GP2, GP3, IOPS Optimised- io Block, IO1,IO2
+ 
+Diff security group and  NACL
+Security Group is the security layer that act as firewall which controls the traffic in and out for the resources in aws
+NACL- it is edition layer to the security group  It act as a firewall  which placed on Subnet. To control the traffic in and out for the resources in the subnet
+ 
+IOPS - it is input output operation per second which mean read and write memory operation speed per second it also called as throughput
+ 
+Kubernetes latest version- it is 1.28
+ 
+EKS It is AWS manager Kubernetes service.
+ 
+RDS types engines
+ 
+There are below
+Mysql
+Postgrasdb
+MariaDB
+MSSQL
+AroraDB
+Oracle
+ 
+ 
+ 
+[3:25 PM] Amol Dorkhande
+
+
+Kubernetes Components
+ 
+Controll Planencomponent-
+Kube Controller Manager
+Api Server
+Kube Scheduler
+Etcd
+cloud-controller-manager
+ 
+Node Components
+Kubelete
+Kube proxy
+ 
+Probes in kubernetes
+Liveness Probe-
+Liveness probes determine whether or not an application running in a container is in a healthy state. If the liveness probe detects an unhealthy state, then Kubernetes kills the container and tries to redeploy it.
+Readiness Probe-
+Readiness probes determine whether or not a container is ready to serve requests. If the readiness probe returns a failed state, then Kubernetes removes the IP address for the container from the endpoints of all Services.
+Startup Probe
+A startup probe verifies whether the application within a container is started. Startup probes run before any other probe, and, unless it finishes successfully, disables other probes. If a container fails its startup probe, then the container is killed and follows the pod’s restartPolicy.
+ 
+Taint and toleration
+
+Taints and tolerations are a mechanism that allows you to ensure that pods are not placed on inappropriate nodes. Taints are added to nodes, while tolerations are defined in the pod specification. When you taint a node, it will repel all the pods except those that have a toleration for that taint. A node can have one or many taints associated with it.
+ 
+How to rollback deployment in Kubernetes ?
+kubectl rollout undo deployment my-deployment --to-revision=2
+
+
+Ho to reduce time to launch instance?
+Asg warmup time
+Using preconfigured AMI
+
+
+How to validate error in Helm?
+Use the helm lint command. The helm lint command will check the chart for syntax errors and other common problems.
+ 
+How to rollback deployment in helm?
+helm rollback release-name -n default revision-number
+ 
+How to destroy all resources keeping specific resource?
+
+terraform destroy -var-file=variables.tf -exclude=my_resource
+
+
+How to import resource in terraform which is created manually
+terraform import resource.resource-name AWS-resouce id
+ 
+aws scenario where there are 3 vpvs VPC-A, VPC-B, VPC-C. I have done vpc peering beetween VPC A and B, also vpc peering beetween VPC B and C. in that case can i access resources from VPC A to VPC C?
+Yes, For example, if the CIDR block of VPC C is 10.0.0.0/16, you would add a route to the route table for VPC A that points to 10.0.0.0/16 and has the target as the VPC peering connection between VPC A and B.
+Once you have added the route to the route table for VPC A, instances in VPC A will be able to access resources in VPC C.
+Instances in VPC A can communicate with instances in VPC C through VPC B.
+ 
+what are the encryption type in s3 bucket?
+
+Server-side encryption with Amazon S3 managed keys (SSE-S3)
+
+Server-side encryption with customer-provided keys (SSE-C)
+Dual-layer encryption (DSSE)
+ 
+How to give specific Kubernetes resource access to user?
+Possible using role and role binding
+ 
+Can i restrict specific resource to use in Kubernetes?
+Yes we can , Using ResourceQuota,
+To restrict a specific resource, you would create a resource quota with the following fields:
+Name: The name of the resource quota.
+Scope: The scope of the resource quota. The scope can be a namespace or the entire cluster.
+Hard: The hard limit for the resource. This is the maximum amount of the resource that a user or group can consume.
+Soft: The soft limit for the resource. This is the recommended amount of the resource that a user or group can consume.
+For example, to restrict the amount of CPU that a user can consume in a namespace, you would create a resource quota with the following fields:
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: cpu-quota
+spec:
+  hard:
+    cpu: 1
+  scope: namespace
+What are the target type in AWS?
+Instance
+IP address
+Lamda
+Application
+ 
+IS it posible create rule in AWS load balancer to restrict specific ip?
+
+Yes
+ 
+how to make secure communicate between 2 services in Kubernetes?
+Use a service mesh
+Use Istio
+Use Kubernetes secrets.
+Use Kubernetes Network Policies.
+ 
+How to restrict deployment to pull image from unknown sources?
+Use a securityContext block in the deployment manifest.
+securityContext:
+denyPullingImages:
+  - '*'
+allowPullingImages:
+  - docker.io
+Use a repositoryPolicy block in the imagePullSecrets field of the deployment manifest.
+ 
+How database sync data in multi az?
+ 
+RDS- Asynchronous replication:
+Arora- Synchronous replication: 
+Dynamo- Partial synchronous replication:
+ 
+can we write a function in jenkins specific stage to notify failure of stage?
+ 
+Yes
+ 
+what are the deployment stratagy in Kubernetes?
+ 
+RollingUpdate:
+Recreate
+Blue/green
+Canary
+ 
+how to unlock terraform?
+Terraform unlock
+ 
+how to run terraform with specific user profile?
+ 
+Using profile parameter
+Terraform configuration file specifies a user profile
+terraform apply -profile=my_profile
+ 
+ 
+Kafka
+Producer and consumer
+MVN
+validate - validate the project is correct and all necessary information is available
+compile - compile the source code of the project
+test - test the compiled source code using a suitable unit testing framework. These tests should not require the code be packaged or deployed
+package - take the compiled code and package it in its distributable format, such as a JAR.
+verify - run any checks on results of integration tests to ensure quality criteria are met
+install - install the package into the local repository, for use as a dependency in other projects locally
+deploy - done in the build environment, copies the final package to the remote repository for sharing with other developers and projects.
+ 
+# First, we will take the input:  
+lower_value = int(input ("Please, Enter the Lowest Range Value: "))  
+upper_value = int(input ("Please, Enter the Upper Range Value: "))  
+  
+print ("The Prime Numbers in the range are: ")  
+for number in range (lower_value, upper_value + 1):  
+    if number > 1:  
+        for i in range (2, number):  
+            if (number % i) == 0:  
+                break  
+        else:  
+            print (number)  
+ 
+ 
+for number in range(10, 0, -1): 
+print(number)	
+ 
+Revers
+text = “Hello Word” [::-1]
+print(text)
+ 
+ 
+# Python program to print Even Numbers in a List
+ 
+# list of numbers
+list1 = [10, 21, 4, 45, 66, 93]
+ 
+# iterating each number in list
+for num in list1:
+ 
+	# checking condition
+	if num % 2 == 0:
+		print(num, end=" ")
+ 
+ 
+S3 bucket classes
+General purpose
+S3 Infrequent access IA
+S3 request access
+S3 inteligent tire
+S3 glacier instant retrieval
+S3 glacier flexible retrieval
+ 
+ 
+ 
+ 
+ 
