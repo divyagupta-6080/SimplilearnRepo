@@ -1,0 +1,54 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Creating the Secrets
+Parameters:
+  ReplicaRegion:
+    Type: String
+    Default: us-east-1
+  AppCI:
+    Type: String
+    Default: xyz
+  BucketName:
+    Type: String
+    Default: sample-xyz-proj-bucket
+ 
+Resources:
+  eeiUnitedVoiceServiceNowSecret:
+    Type: 'AWS::SecretsManager::Secret'
+    Properties:
+      Name: xyz-serviceNow-header
+      Description: "This secret will use to connect ServiceNow."
+      SecretString: '{"auth_key":"123Abc"}'
+      ReplicaRegions:
+        - Region: !Ref ReplicaRegion
+      Tags:
+        -
+          Key: ApplicationCI
+          Value: xyz
+  S3Bucket:
+    Type: 'AWS::S3::Bucket'
+    DeletionPolicy: Retain
+    Properties:
+      BucketName: !Ref BucketName 
+      
+  SampleGlobalDynamoDB:
+    Type: "AWS::DynamoDB::Table"
+    Properties:
+      TableName: !Sub "${AppCI}-sample-services-db"
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
+      SSESpecification:
+        SSEEnabled: true    
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: "docType"
+          AttributeType: "S"
+        - AttributeName: "id"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "docType"
+          KeyType: "HASH"
+        - AttributeName: "id"
+          KeyType: "RANGE"
+      Tags:
+        - Key: "ApplicationCI"
+          Value: !Ref AppCI
